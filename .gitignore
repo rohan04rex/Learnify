@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# PHP
+vendor/
+
+# Admin Frontend
+admin-frontend/node_modules/
+admin-frontend/dist/

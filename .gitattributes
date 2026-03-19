@@ -1,0 +1,9 @@
+# Mark the built version as "vendored" (not your primary code)
+admin-dashboard/** linguist-vendored
+
+# Tell GitHub to treat .jsx files explicitly as JavaScript (if it isn't already)
+*.jsx linguist-language=JavaScript
+
+# Mark large static HTML files as non-detectable for the language chart
+*.html linguist-detectable=false
+views/*.html linguist-detectable=false

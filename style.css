@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.font-manrope {
+    font-family: 'Manrope', sans-serif !important;
+}
+
+.font-poppins {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FDFBF9;
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Hover States & Overrides*/
+a {
+    text-decoration: none;
+}
+
+.hover-text-dark {
+    transition: all 0.3s ease;
+}
+
+.hover-text-dark:hover {
+    color: #111827 !important;
+    text-shadow: 0 0 1px rgba(17, 24, 39, 0.3);
+}
+
+.hover-bg-light {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-bg-light:hover {
+    background-color: #f3f4f6 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.hover-bg-darker {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-bg-darker:hover {
+    background-color: #374151 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(17, 24, 39, 0.3), 0 4px 6px -2px rgba(17, 24, 39, 0.15);
+}
+
+.card-custom {
+    background-color: #F6F5F1;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+}
+
+.card-custom:hover {
+    background-color: #ffffff;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: #e5e7eb;
+}
+
+.transition-transform {
+    transition: transform 0.3s ease;
+}
+
+.transition-colors {
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.transition-shadow {
+    transition: box-shadow 0.3s ease;
+}
+
+/* Group hover effects */
+.card-custom:hover .group-hover-scale {
+    transform: scale(1.15);
+}
+
+.card-custom:hover .group-hover-rotate {
+    transform: scale(1.15) rotate(-12deg);
+}
+
+.card-custom:hover .group-hover-up {
+    transform: scale(1.15) translateY(-6px);
+}
+
+.card-custom:hover .group-hover-scale-110 {
+    transform: scale(1.1);
+}
+
+.card-custom .material-symbols-outlined.group-hover-text-dark {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-custom:hover .group-hover-text-dark {
+    color: #111827 !important;
+    transform: translateX(4px);
+}
+
+.card-custom:hover .group-hover-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Mega Menu Custom Styling */
+.mega-dropdown .dropdown-toggle::after {
+    display: none;
+    /* Hide default bootstrap caret */
+}
+
+/* Adjust dropdown toggle arrow transition */
+.mega-dropdown .dropdown-toggle .material-symbols-outlined {
+    transition: transform 0.3s ease;
+}
+
+.mega-dropdown.show .dropdown-toggle .material-symbols-outlined {
+    transform: rotate(180deg);
+}
+
+.mega-menu {
+    border-radius: 1.25rem !important;
+    background-color: transparent;
+    /* Wrapper is transparent, children dictate bg */
+    border: 1px solid #f3f4f6 !important;
+}
+
+/* Category Items Selection */
+.mega-category-item {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    padding: 0.65rem 1rem;
+    margin-bottom: 0.125rem;
+}
+
+.mega-category-item:hover,
+.mega-category-item.active {
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.mega-category-item .material-symbols-outlined {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.5;
+}
+
+.mega-category-item.active .material-symbols-outlined {
+    color: #111827 !important;
+    font-weight: bold;
+    opacity: 1;
+}
+
+/* Submenu Transitions */
+.mega-submenu {
+    display: none;
+    animation: fadeInMega 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mega-submenu.active {
+    display: block;
+}
+
+@keyframes fadeInMega {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Specific text hover extensions */
+.hover-text-primary:hover {
+    color: #312e81 !important;
+    text-decoration: underline;
+}
+
+.group-hover-parent:hover .hover-text-primary {
+    color: #312e81 !important;
+    text-decoration: underline;
+}
+
+/* Typing Animation Cursor */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: #312e81;
+    /* Default to primary color, will inherit otherwise mostly */
+}
+
+#typing-text-1.typing-cursor::after {
+    color: #312e81;
+}
+
+#typing-text-2.typing-cursor::after {
+    color: #111827;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
