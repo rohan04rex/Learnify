@@ -1,0 +1,61 @@
+<div class="row justify-content-center align-items-center h-100">
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-header bg-white border-0 pb-0 pt-4 px-4 text-center">
+                <h2 class="font-sans fw-bold fs-3" style="color: #111827;">Create Account</h2>
+                <p class="text-muted mb-0 font-sans fs-6">Join Learnify today.</p>
+            </div>
+            <div class="card-body p-4 pt-3">
+                <form name="registerForm" ng-submit="register()" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Full Name</label>
+                        <input type="text" name="name" class="form-control rounded-3 py-2 bg-light border-0"
+                            placeholder="John Doe" style="box-shadow: none;" ng-model="user.name" required
+                            minlength="3">
+                        <div class="text-danger small mt-1"
+                            ng-show="registerForm.name.$invalid && registerForm.name.$touched">
+                            <span ng-show="registerForm.name.$error.required">Name is required.</span>
+                            <span ng-show="registerForm.name.$error.minlength">Name must be at least 3
+                                characters.</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Email address</label>
+                        <input type="email" name="email" class="form-control rounded-3 py-2 bg-light border-0"
+                            placeholder="name@example.com" style="box-shadow: none;" ng-model="user.email" required>
+                        <div class="text-danger small mt-1"
+                            ng-show="registerForm.email.$invalid && registerForm.email.$touched">
+                            <span ng-show="registerForm.email.$error.required">Email is required.</span>
+                            <span ng-show="registerForm.email.$error.email">Please enter a valid email address.</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Password</label>
+                        <input type="password" name="password" class="form-control rounded-3 py-2 bg-light border-0"
+                            placeholder="Create a password" style="box-shadow: none;" ng-model="user.password" required
+                            minlength="6">
+                        <div class="text-danger small mt-1"
+                            ng-show="registerForm.password.$invalid && registerForm.password.$touched">
+                            <span ng-show="registerForm.password.$error.required">Password is required.</span>
+                            <span ng-show="registerForm.password.$error.minlength">Password must be at least 6
+                                characters.</span>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-dark w-100 rounded-pill py-2 font-sans fw-bold transition-colors border-0"
+                        style="background-color: #111827;" ng-disabled="registerForm.$invalid">Sign Up</button>
+                </form>
+
+                <div class="text-center mt-4 mb-2">
+                    <span class="text-muted font-sans fs-6">Already have an account? </span>
+                    <a href="#!/login"
+                        class="text-decoration-none font-sans fw-bold text-dark hover-text-dark transition-colors fs-6">Log
+                        in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

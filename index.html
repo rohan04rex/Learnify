@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS - Start Learning Today</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts Material Symbols -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="style.css">
+    <meta name="disabled-font-classes"
+        content="font-geist,font-roboto,font-montserrat,font-poppins,font-playfair,font-merriweather,font-jakarta,font-manrope,font-space-grotesk,font-work-sans,font-pt-serif,font-geist-mono,font-space-mono,font-quicksand,font-newsreader,font-oswald,font-dm-sans,font-cormorant,font-google-sans-flex,font-bricolage,font-nunito,font-instrument-serif">
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+    <link id="all-fonts-link-font-poppins" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Top Announcement Bar (Trust Signals) -->
+    <div class="d-none d-md-flex justify-content-center align-items-center gap-4 py-2 border-bottom"
+        style="background-color: #FDFBF9; border-color: #f3f4f6 !important; font-size: 0.875rem; color: #4b5563;">
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">check_circle</span>
+            <span class="font-sans fw-bold">Learn at your own pace</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">workspace_premium</span>
+            <span class="font-sans fw-bold">Industry-recognized certificates</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">verified_user</span>
+            <span class="font-sans fw-bold">100% online process</span>
+        </div>
+    </div>
+
+    <!-- Global Navigation -->
+    <header class="sticky-top w-100 px-4 px-md-5 py-3 d-flex align-items-center justify-content-between"
+        style="z-index: 1030; background-color: rgba(255, 255, 255, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
+        <a href="#" class="fs-3 fw-semibold text-dark font-poppins" style="letter-spacing: -0.025em;">
+            learnify
+        </a>
+
+        <nav class="d-none d-md-flex align-items-center gap-4 position-relative">
+            <a href="#" class="fs-5 font-sans fw-bold transition-colors hover-text-dark"
+                style="color: #4b5563;">Home</a>
+            <div class="nav-item dropdown mega-dropdown">
+                <a href="#"
+                    class="fs-5 font-sans fw-bold transition-colors hover-text-dark dropdown-toggle d-flex align-items-center gap-1"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="color: #4b5563; text-decoration: none;">
+                    Explore
+                    <span class="material-symbols-outlined" style="font-size: 1.25rem;">expand_more</span>
+                </a>
+                <div class="dropdown-menu mega-menu border-0 shadow-lg mt-3 p-0"
+                    style="width: 800px; max-width: 90vw; position: absolute; left: 50%; transform: translateX(-30%);">
+                    <div class="d-flex" style="min-height: 420px; background-color: #fff;">
+                        <!-- Left Column (Categories) -->
+                        <div class="col-5 d-flex flex-column border-end position-relative py-3 px-3"
+                            style="background-color: #f8fafc; z-index: 10;">
+                            <!-- Group 1 -->
+                            <div class="mb-3">
+                                <h6 class="text-muted text-uppercase fw-bold mb-2"
+                                    style="font-size: 0.75rem; letter-spacing: 0.05em; padding-left: 1rem;">Areas of
+                                    Study</h6>
+                                <div class="mega-category-item active d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-web-dev">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Development</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-data-science">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Data Science</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-design">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Design UI/UX</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-marketing">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Marketing</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-ai">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">AI &amp; Machine
+                                        Learning</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-business">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Business Strategy</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-cyber">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Cyber Security</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                                <div class="mega-category-item d-flex align-items-center justify-content-between text-decoration-none"
+                                    data-target="submenu-personal">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Personal Development</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column (Subcategories) -->
+                        <div class="col-7 p-5 position-relative bg-white" id="mega-menu-content">
+                            <!-- Development -->
+                            <div id="submenu-web-dev" class="mega-submenu active">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Development</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Web Development</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Build scalable websites
+                                            and
+                                            web applications.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Mobile App Development</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Create iOS and Android
+                                            apps
+                                            with modern tools.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Game Development</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Learn Unity, Unreal, and
+                                            game design principles.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Database Design & Development</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Master SQL, NoSQL, and
+                                            data architecture.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Development Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Data Science -->
+                            <div id="submenu-data-science" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Data Science</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Data Analysis</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Master data manipulation
+                                            and statistics.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Data Visualization</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Create compelling charts
+                                            and dashboards.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Big Data Technologies</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Learn Hadoop, Spark, and
+                                            data engineering.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Data Science Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Design UI/UX -->
+                            <div id="submenu-design" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Design UI/UX</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">User Interface Design</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Create beautiful visual
+                                            layouts.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">User Experience Research</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Understand user behavior
+                                            and needs.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Design Tools</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Master Figma, Adobe XD,
+                                            and Sketch.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Design UI/UX Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Marketing -->
+                            <div id="submenu-marketing" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Marketing</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Digital Marketing</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Learn online advertising
+                                            and strategy.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">SEO & SEM</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Master search engine
+                                            optimization.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Content & Social Media</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Build engaging content
+                                            campaigns.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Marketing Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- AI & Machine Learning -->
+                            <div id="submenu-ai" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">AI &amp; Machine Learning</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Deep Learning & Neural Networks</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Build advanced ML
+                                            models.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Natural Language Processing</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Process and analyze text
+                                            data.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Computer Vision</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Build image recognition
+                                            systems.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All AI & Machine Learning</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Business Strategy -->
+                            <div id="submenu-business" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Business Strategy</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Leadership & Management</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Develop core leadership
+                                            skills.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Entrepreneurship</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Start and scale your
+                                            business.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Strategic Planning & Project Management</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Execute large-scale
+                                            initiatives.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Business Strategy
+                                            Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Cyber Security -->
+                            <div id="submenu-cyber" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Cyber Security</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Ethical Hacking</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Learn penetration testing
+                                            techniques.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Network & Cloud Security</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Secure infrastructure and
+                                            deployments.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Risk Management</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Identify and mitigate
+                                            digital threats.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Cyber Security Courses</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Personal Development -->
+                            <div id="submenu-personal" class="mega-submenu">
+                                <h5 class="fw-bold mb-4" style="color: #111827;">Personal Development</h5>
+                                <div class="d-flex flex-column gap-4">
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Time Management & Productivity</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Optimize your daily
+                                            workflow.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Communication Skills</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Improve public speaking
+                                            and writing.</span>
+                                    </a>
+                                    <a href="#" class="d-flex flex-column text-decoration-none group-hover-parent">
+                                        <span class="fw-semibold hover-text-primary transition-colors fs-6"
+                                            style="color: #111827;">Emotional Intelligence & Well-being</span>
+                                        <span class="text-muted" style="font-size: 0.875rem;">Build resilience and
+                                            self-awareness.</span>
+                                    </a>
+                                    <a href="#"
+                                        class="d-flex gap-2 align-items-center text-decoration-none group-hover-parent pt-2 mt-2 border-top">
+                                        <span class="fw-bold" style="color: #312e81;">All Personal Development</span>
+                                        <span class="material-symbols-outlined fs-6"
+                                            style="color: #312e81;">arrow_right_alt</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="fs-5 font-sans fw-bold transition-colors hover-text-dark"
+                style="color: #4b5563;">About</a>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+            <!-- Add to Cart Option -->
+            <a href="cart.html"
+                class="d-inline-flex align-items-center justify-content-center p-2 rounded-circle transition-colors hover-bg-light position-relative"
+                style="color: #4b5563; text-decoration: none;">
+                <span class="material-symbols-outlined" style="font-size: 1.5rem;">shopping_cart</span>
+            </a>
+            <button id="nav-login-btn"
+                class="btn d-none d-md-inline-flex fs-5 px-3 py-2 rounded-pill font-sans fw-bold transition-colors hover-bg-light border-0"
+                style="color: #111827;" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Log In
+            </button>
+            <a href="#"
+                class="d-inline-flex d-md-none align-items-center justify-content-center p-2 rounded-circle border transition-colors hover-bg-light"
+                style="border-color: #e5e7eb; color: #111827;">
+                <span class="material-symbols-outlined" style="font-size: 1.5rem; stroke-width: 1.5;">menu</span>
+            </a>
+            <button id="nav-register-btn"
+                class="btn d-none d-md-inline-flex align-items-center justify-content-center px-4 py-2 rounded-pill fs-5 font-sans fw-bold transition-colors hover-bg-darker border-0"
+                style="background-color: #111827; color: white;" data-bs-toggle="modal" data-bs-target="#registerModal">
+                Register
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+        <!-- Hero Section -->
+        <section class="container-fluid px-4 px-md-5 pt-5 pb-4" style="max-width: 1400px; margin-top: 2rem;">
+            <h1 class="display-4 fw-semibold font-sans"
+                style="line-height: 1.05; letter-spacing: -0.025em; color: #111827; max-width: 56rem; min-height: 120px;">
+                <span id="typing-text-1" class="font-sans fw-semibold" style="color: #312e81;"></span><br>
+                <span id="typing-text-2"></span>
+            </h1>
+            <p class="fs-5 fw-semibold font-manrope mt-4" style="color: #4b5563; max-width: 42rem;">
+                Customized learning paths start right here.
+            </p>
+        </section>
+
+        <!-- Course Discovery Grid -->
+        <section class="container-fluid px-4 px-md-5 pb-5" style="max-width: 1400px;">
+            <div class="row g-3">
+
+                <!-- Card 1 -->
+
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=Development" class="text-decoration-none">
+
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative"
+                            style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <div class="d-flex align-items-center gap-2">
+                                    <h3 class="fs-5 fw-semibold font-sans m-0"
+                                        style="letter-spacing: -0.025em; color: #111827;">Web Dev</h3>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="fw-bold font-sans text-uppercase rounded-pill"
+                                        style="background-color: #d1fae5; color: #065f46; font-size: 0.75rem; padding: 0.25rem 0.5rem; letter-spacing: 0.1em;">Popular</span>
+
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-center mt-4">
+                                <div class="d-flex align-items-center justify-content-center shadow-sm group-hover-scale transition-transform"
+                                    style="width: 5rem; height: 5rem; border-radius: 1rem; background-color: #6366f1;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">code</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=Data%20Science" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative" style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <h3 class="fs-5 fw-semibold font-sans m-0"
+                                    style="letter-spacing: -0.025em; color: #111827;">Data Science</h3>
+                                <span class="material-symbols-outlined group-hover-text-dark transition-colors"
+                                    style="font-size: 1.25rem; color: #9ca3af; stroke-width: 1.5;">arrow_forward</span>
+                            </div>
+                            <div
+                                class="flex-grow-1 d-flex align-items-center justify-content-center mt-4 position-relative">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle shadow-sm group-hover-rotate transition-transform"
+                                    style="width: 5rem; height: 5rem; background-color: #fbbf24;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">bar_chart</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=Design" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative" style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <h3 class="fs-5 fw-semibold font-sans m-0"
+                                    style="letter-spacing: -0.025em; color: #111827;">Design</h3>
+                                <span class="material-symbols-outlined group-hover-text-dark transition-colors"
+                                    style="font-size: 1.25rem; color: #9ca3af; stroke-width: 1.5;">arrow_forward</span>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-center mt-4">
+                                <div class="d-flex align-items-center justify-content-center shadow-sm group-hover-scale transition-transform"
+                                    style="width: 5rem; height: 5rem; border-radius: 2rem; background-color: #fb7185;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">draw</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=Marketing" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative" style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <h3 class="fs-5 fw-semibold font-sans m-0"
+                                    style="letter-spacing: -0.025em; color: #111827;">Marketing</h3>
+                                <span class="material-symbols-outlined group-hover-text-dark transition-colors"
+                                    style="font-size: 1.25rem; color: #9ca3af; stroke-width: 1.5;">arrow_forward</span>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-center mt-4">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle shadow-sm group-hover-up transition-transform"
+                                    style="width: 5rem; height: 5rem; background-color: #334155;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">campaign</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 5 (Row 2) -->
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=AI%20%26%20Machine%20Learning" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative" style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <div class="d-flex align-items-center gap-2">
+                                    <h3 class="fs-5 fw-semibold font-sans m-0"
+                                        style="letter-spacing: -0.025em; color: #111827;">AI &amp; Machine Learning</h3>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="fw-bold font-sans text-uppercase rounded-pill"
+                                        style="background-color: #d1fae5; color: #065f46; font-size: 0.75rem; padding: 0.25rem 0.5rem; letter-spacing: 0.1em;">Popular</span>
+                                    <span class="material-symbols-outlined group-hover-text-dark transition-colors"
+                                        style="font-size: 1.25rem; color: #9ca3af; stroke-width: 1.5;">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-center mt-4">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle shadow-sm group-hover-scale transition-transform"
+                                    style="width: 5rem; height: 5rem; background-color: #0d9488;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">smart_toy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 6 (Row 2) -->
+                <article class="col-12 col-md-6 col-lg-3">
+                    <a href="courses.html?category=Business%20Strategy" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex flex-column h-100 position-relative" style="min-height: 220px;">
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <h3 class="fs-5 fw-semibold font-sans m-0"
+                                    style="letter-spacing: -0.025em; color: #111827;">Business Strategy</h3>
+                                <span class="material-symbols-outlined group-hover-text-dark transition-colors"
+                                    style="font-size: 1.25rem; color: #9ca3af; stroke-width: 1.5;">arrow_forward</span>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-center mt-4">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle shadow-sm group-hover-scale transition-transform"
+                                    style="width: 5rem; height: 5rem; background-color: #b45309;">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 2.5rem; color: white; stroke-width: 1.5;">work</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Wide Card (Row 2, spans 2 cols) -->
+                <article class="col-12 col-lg-6">
+                    <a href="courses.html" class="text-decoration-none">
+                        <div class="card-custom p-4 d-flex align-items-center justify-content-between h-100"
+                            style="min-height: 160px;">
+                            <h3 class="fs-5 fw-semibold font-sans m-0"
+                                style="letter-spacing: -0.025em; color: #111827;">
+                                Browse all courses &amp; paths</h3>
+                            <div class="d-flex align-items-center justify-content-center rounded-circle bg-white shadow-sm group-hover-shadow transition-shadow"
+                                style="width: 3rem; height: 3rem;">
+                                <span class="material-symbols-outlined"
+                                    style="font-size: 1.25rem; color: #111827; stroke-width: 1.5;">arrow_forward</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Bottom Banner Call to Action -->
+        <section class="container-fluid px-4 px-md-5 pb-5 mb-4" style="max-width: 1400px;">
+            <div class="text-center position-relative overflow-hidden w-100 px-4 px-md-5 py-5"
+                style="background: linear-gradient(to bottom right, #E1EAF4, #D5E1E8); border-radius: 2.5rem;">
+                <h2 class="display-5 fw-semibold font-sans position-relative mx-auto my-5"
+                    style="color: #1C2C3E; letter-spacing: -0.025em; max-width: 42rem; z-index: 10;">
+                    Get your competitive edge back with Pro Certifications by Learnify
+                </h2>
+                <!-- Decorative element -->
+                <div class="position-absolute rounded-circle"
+                    style="bottom: -6rem; right: -6rem; width: 24rem; height: 24rem; background-color: rgba(255,255,255,0.2); filter: blur(3rem);">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top pt-5 pb-4 px-4 px-md-5" style="border-color: #e5e7eb !important;">
+        <div class="container-fluid p-0 mb-5" style="max-width: 1400px;">
+            <div class="row g-4 fs-5">
+                <div class="col-6 col-md-3">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Learnify</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">About Us</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Careers</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Catalog</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">All Courses</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Certificates</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">For Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Support</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Help Center</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Contact</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Community</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Legal</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Privacy Policy</a></li>
+                        <li><a href="#" class="font-sans fw-bold hover-text-dark transition-colors"
+                                style="color: #4b5563;">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid p-0 border-top pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between"
+            style="max-width: 1400px; border-color: #f3f4f6 !important; color: #6b7280;">
+            <p class="mb-0 fw-bold font-sans">© 2026 Learnify Inc. All rights reserved.</p>
+            <div class="d-flex gap-3 mt-3 mt-md-0">
+                <a href="#" class="hover-text-dark transition-colors" style="color: #6b7280;"><span
+                        class="material-symbols-outlined" style="font-size: 1.25rem; stroke-width: 1.5;">tag</span></a>
+                <a href="#" class="hover-text-dark transition-colors" style="color: #6b7280;"><span
+                        class="material-symbols-outlined" style="font-size: 1.25rem; stroke-width: 1.5;">link</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title font-sans fw-bold fs-4" style="color: #111827;">Welcome Back</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-3">
+                    <div id="loginError" class="alert alert-danger d-none font-sans py-2"></div>
+                    <form id="loginForm" onsubmit="submitLogin(event)">
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Email</label>
+                            <input type="email" id="loginEmail" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="loginPassword" class="form-control rounded-start-3 py-2 bg-light border-0" placeholder="••••••••" required>
+                                <button class="btn bg-light border-0 rounded-end-3 text-muted px-3" type="button" onclick="const p=document.getElementById('loginPassword'); p.type=p.type==='password'?'text':'password'; this.querySelector('span').textContent=p.type==='password'?'visibility':'visibility_off';">
+                                    <span class="material-symbols-outlined align-middle" style="font-size: 20px;">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-dark w-100 rounded-pill py-2 font-sans fw-bold border-0">Sign In</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <span class="text-muted font-sans">Don't have an account? </span>
+                        <a href="#" class="fw-bold text-dark" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title font-sans fw-bold fs-4" style="color: #111827;">Create Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-3">
+                    <div id="registerError" class="alert alert-danger d-none font-sans py-2"></div>
+                    <div id="registerSuccess" class="alert alert-success d-none font-sans py-2"></div>
+                    <form id="registerForm" onsubmit="submitRegister(event)">
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Full Name</label>
+                            <input type="text" id="regName" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="John Doe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Email</label>
+                            <input type="email" id="regEmail" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="regPassword" class="form-control rounded-start-3 py-2 bg-light border-0" placeholder="At least 6 characters" required>
+                                <button class="btn bg-light border-0 rounded-end-3 text-muted px-3" type="button" onclick="const p=document.getElementById('regPassword'); p.type=p.type==='password'?'text':'password'; this.querySelector('span').textContent=p.type==='password'?'visibility':'visibility_off';">
+                                    <span class="material-symbols-outlined align-middle" style="font-size: 20px;">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-dark w-100 rounded-pill py-2 font-sans fw-bold border-0">Sign Up</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <span class="text-muted font-sans">Already have an account? </span>
+                        <a href="#" class="fw-bold text-dark" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Mega Menu Interactivity & Auth Logic -->
+    <script src="home.js"></script>
+</body>
+</html>
