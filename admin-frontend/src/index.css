@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  --primary-color: #2563EB;
+  --dark-color: #111827;
+  --bg-light: #f3f4f6;
+  --muted-text: #6B7280;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-light);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+  color: var(--dark-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-sans {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Base custom utilities used matching website */
+.hover-bg-light:hover {
+  background-color: var(--bg-light) !important;
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+.transition-colors {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-dark {
+    color: var(--dark-color) !important;
+}
+
+/* Custom Table fixes */
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+/* Remove default link styles */
+a {
+    text-decoration: none;
+}
