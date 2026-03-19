@@ -14,5 +14,6 @@ Thumbs.db
 # PHP
 vendor/
 
-# Local configuration
-.env
+# Admin Frontend
+admin-frontend/node_modules/
+admin-frontend/dist/
