@@ -223,11 +223,15 @@
                                 <h3 class="fs-6 fw-bold font-sans mb-1" style="color:#111827; line-height:1.4;">${escapeHTML(e.CourseName)}</h3>
                                 <p class="text-muted font-sans mb-2" style="font-size:0.875rem;">By ${escapeHTML(e.Instructor)}</p>
                                 <p class="text-muted font-sans mb-3" style="font-size:0.75rem;">Enrolled on ${escapeHTML(new Date(e.EnrolledAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }))}</p>
-                                <div class="mt-auto pt-3 border-top" style="border-color:#f3f4f6 !important;">
-                                    <button class="btn w-100 rounded-pill py-2 font-sans fw-bold border-0"
-                                        style="background-color:#f3f4f6; color:#111827;">
-                                        <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">play_circle</span>
-                                        Continue Learning
+                                <div class="mt-auto pt-3 border-top d-flex gap-2" style="border-color:#f3f4f6 !important;">
+                                    <button class="btn btn-dark flex-grow-1 rounded-pill py-2 font-sans fw-bold border-0"
+                                        style="background-color:#111827; color:white;">
+                                        <span class="material-symbols-outlined align-middle me-1" style="font-size:1.125rem;">play_circle</span>
+                                        Learn
+                                    </button>
+                                    <button onclick="unenrollCourse(${e.CourseID}, '${escapeHTML(e.CourseName.replace(/'/g, "\\'"))}')" class="btn btn-outline-danger rounded-circle p-2 d-flex align-items-center justify-content-center" 
+                                            style="width: 40px; height: 40px;" title="Unenroll / Disown Course">
+                                        <span class="material-symbols-outlined" style="font-size:1.25rem;">delete_forever</span>
                                     </button>
                                 </div>
                             </div>
@@ -242,6 +246,22 @@
             }
         });
 
+        async function unenrollCourse(courseID, courseName) {
+            if (!confirm(`Are you sure you want to disown/unenroll from "${courseName}"?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/cart.php?courseID=${courseID}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Successfully unenrolled.');
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    showToast(data.message || 'Error unenrolling.', true);
+                }
+            } catch (err) {
+                showToast('Connection error.', true);
+            }
+        }
+
         async function addToCart(courseID, btn) {
             let localCart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
             if (!localCart.includes(courseID)) {
@@ -251,6 +271,8 @@
             btn.disabled = true;
             btn.innerHTML = '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span> Added';
             showToast('Added to Cart!');
+            // Update global badge if updateGlobalCartBadge exists (from home.js if included, but student panel might not have it)
+            if (typeof updateGlobalCartBadge === 'function') updateGlobalCartBadge();
         }
 
         async function logout() {

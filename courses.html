@@ -393,16 +393,23 @@
                             <div class="mt-auto pt-3 border-top" style="border-color:#f3f4f6 !important;">
                                 <p class="text-muted font-sans mb-3" style="font-size:0.875rem;">By ${escapeHTML(c.Instructor)}</p>
                                 ${enrolled
-                                    ? `<button class="btn w-100 rounded-pill py-2 font-sans fw-bold border-0" style="background:#d1fae5; color:#065f46;" disabled>
-                                           <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">check_circle</span>Enrolled
-                                       </button>`
-                                    : `<div class="d-flex gap-2 w-100">
-                                           <button class="btn btn-outline-dark rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Add to Cart" onclick="addToCart(${c.CourseID}, this)" ${localCart.includes(c.CourseID) ? 'disabled' : ''}>
-                                               ${localCart.includes(c.CourseID) 
-                                                  ? '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span>'
-                                                  : '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">add_shopping_cart</span>'
-                                               }
+                                    ? `<div class="d-flex gap-2 w-100">
+                                           <button class="btn flex-grow-1 rounded-pill py-2 font-sans fw-bold border-0" style="background:#d1fae5; color:#065f46;" disabled>
+                                               <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">check_circle</span>Enrolled
                                            </button>
+                                           <button onclick="unenrollCourse(${c.CourseID}, '${escapeHTML(c.CourseName.replace(/'/g, "\\'"))}')" class="btn btn-outline-danger rounded-pill px-3 py-2 font-sans fw-bold d-flex align-items-center justify-content-center" title="Unenroll / Disown">
+                                               <span class="material-symbols-outlined" style="font-size:1.125rem;">delete</span>
+                                           </button>
+                                       </div>`
+                                    : `<div class="d-flex gap-2 w-100">
+                                           ${localCart.includes(c.CourseID) 
+                                               ? `<button class="btn btn-outline-danger rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Remove from Cart" onclick="removeFromCart(${c.CourseID}, this)">
+                                                      <span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">remove_shopping_cart</span>
+                                                  </button>`
+                                               : `<button class="btn btn-outline-dark rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Add to Cart" onclick="addToCart(${c.CourseID}, this)">
+                                                      <span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">add_shopping_cart</span>
+                                                  </button>`
+                                           }
                                            <button class="btn btn-dark rounded-pill py-2 font-sans fw-bold border-0 flex-grow-1" onclick="buyNow(${c.CourseID}, this)">
                                                Buy Now
                                            </button>
@@ -433,10 +440,34 @@
                 localCart.push(courseID);
                 localStorage.setItem('learnify_cart', JSON.stringify(localCart));
                 updateGlobalCartBadge();
+                showToast('Added to Cart!');
+                filterCourses(); // Re-render to show "Remove from Cart" button
             }
-            btn.disabled = true;
-            btn.innerHTML = '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span>';
-            showToast('Added to Cart!');
+        }
+
+        function removeFromCart(courseID, btn) {
+            localCart = localCart.filter(id => id !== courseID);
+            localStorage.setItem('learnify_cart', JSON.stringify(localCart));
+            updateGlobalCartBadge();
+            showToast('Removed from Cart');
+            filterCourses(); // Re-render to show "Add to Cart" button
+        }
+
+        async function unenrollCourse(courseID, courseName) {
+            if (!confirm(`Are you sure you want to disown/unenroll from "${courseName}"?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/cart.php?courseID=${courseID}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    enrolledIds.delete(courseID);
+                    showToast('Successfully unenrolled.');
+                    filterCourses(); // Re-render
+                } else {
+                    showToast(data.message || 'Error unenrolling.', true);
+                }
+            } catch (err) {
+                showToast('Connection error.', true);
+            }
         }
 
         async function buyNow(courseID, btn) {
