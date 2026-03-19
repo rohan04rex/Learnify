@@ -1,7 +1,3 @@
-# Learnify
-🎓 Learnify: A full-stack LMS platform built with Vanilla JS, Bootstrap 5, PHP, MySQL, and a Node.js/React administration dashboard.
-
-
 # Learnify 🎓
 
 Learnify is a comprehensive modern e-learning platform designed to provide a seamless learning experience for students and powerful management tools for administrators.
