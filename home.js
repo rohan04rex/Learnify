@@ -112,7 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Auth & Session Logic ──────────────────────────────────────────────
 const API_BASE = 'http://localhost/Learnify XAMP/api';
 
+function updateGlobalCartBadge() {
+    const badge = document.getElementById('global-cart-badge');
+    if (!badge) return;
+    try {
+        const cart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
+        if (cart.length > 0) {
+            badge.textContent = cart.length;
+            badge.classList.remove('d-none');
+        } else {
+            badge.classList.add('d-none');
+        }
+    } catch (e) {}
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
+    updateGlobalCartBadge();
     try {
         const res = await fetch(`${API_BASE}/cart.php?action=check`);
         const data = await res.json();
@@ -125,11 +140,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 localStorage.setItem('learnify_cart', JSON.stringify(merged));
             }
 
-            // Intercept cart saves to mirror them to this user's persistent cart
+            // Intercept cart saves to mirror them to this user's persistent cart and update badge
             const origSet = localStorage.setItem;
             localStorage.setItem = function(k, v) {
                 origSet.apply(this, arguments);
-                if (k === 'learnify_cart') origSet.call(this, 'learnify_cart_' + data.user.userID, v);
+                if (k === 'learnify_cart') {
+                    origSet.call(this, 'learnify_cart_' + data.user.userID, v);
+                    updateGlobalCartBadge();
+                }
             };
 
             // Swap Login/Register buttons with user info + logout
