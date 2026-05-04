@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Learnify</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts Material Symbols -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="style.css">
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
+    <link id="all-fonts-link-font-poppins" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        .hover-scale {
+            transition: transform 0.2s;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Top Announcement Bar (Trust Signals) -->
+    <div class="d-none d-md-flex justify-content-center align-items-center gap-4 py-2 border-bottom"
+        style="background-color: #FDFBF9; border-color: #f3f4f6 !important; font-size: 0.875rem; color: #4b5563;">
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">check_circle</span>
+            <span class="font-sans fw-bold">Learn at your own pace</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">workspace_premium</span>
+            <span class="font-sans fw-bold">Industry-recognized certificates</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size: 1rem; stroke-width: 1.5;">verified_user</span>
+            <span class="font-sans fw-bold">100% online process</span>
+        </div>
+    </div>
+
+    <!-- Global Navigation -->
+    <header class="sticky-top w-100 px-4 px-md-5 py-3 d-flex align-items-center justify-content-between"
+        style="z-index: 1030; background-color: rgba(255, 255, 255, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);">
+        <a href="index.html" class="fs-3 fw-semibold text-dark font-poppins text-decoration-none"
+            style="letter-spacing: -0.025em;">
+            learnify
+        </a>
+
+        <nav class="d-none d-md-flex align-items-center gap-4 position-relative">
+            <a href="index.html" class="fs-5 font-sans fw-bold transition-colors hover-text-dark text-decoration-none"
+                style="color: #4b5563;">Home</a>
+            <div class="nav-item dropdown mega-dropdown">
+                <a href="#"
+                    class="fs-5 font-sans fw-bold transition-colors hover-text-dark dropdown-toggle d-flex align-items-center gap-1 text-decoration-none"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="color: #4b5563;">
+                    Explore
+                    <span class="material-symbols-outlined" style="font-size: 1.25rem;">expand_more</span>
+                </a>
+                <div class="dropdown-menu mega-menu border-0 shadow-lg mt-3 p-0"
+                    style="width: 320px; max-width: 90vw; position: absolute; left: 50%; transform: translateX(-50%);">
+                    <div class="d-flex" style="background-color: #fff;">
+                        <!-- Categories -->
+                        <div class="w-100 d-flex flex-column position-relative py-3 px-3"
+                            style="background-color: #f8fafc; z-index: 10;">
+                            <div class="mb-3">
+                                <h6 class="text-muted text-uppercase fw-bold mb-2"
+                                    style="font-size: 0.75rem; letter-spacing: 0.05em; padding-left: 1rem;">Areas of
+                                    Study</h6>
+                                <a href="courses.html?category=Development"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Development</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Data%20Science"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Data Science</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Design"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Design UI/UX</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Marketing"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Marketing</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=AI%20%26%20Machine%20Learning"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">AI &amp; Machine
+                                        Learning</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Business"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Business Strategy</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Cyber%20Security"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Cyber Security</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                                <a href="courses.html?category=Personal%20Development"
+                                    class="d-flex align-items-center justify-content-between text-decoration-none py-2 px-3 rounded hover-bg-light hover-text-dark transition-colors">
+                                    <span class="fs-6 fw-semibold" style="color: #111827;">Personal Development</span>
+                                    <span class="material-symbols-outlined fs-6 text-muted ms-2">chevron_right</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="about.html"
+                class="fs-5 font-sans fw-bold transition-colors text-dark text-decoration-none">About</a>
+        </nav>
+
+        <div class="d-flex align-items-center gap-3">
+            <!-- Add to Cart Option -->
+            <a href="cart.html"
+                class="d-inline-flex align-items-center justify-content-center p-2 rounded-circle transition-colors hover-bg-light position-relative text-decoration-none"
+                style="color: #4b5563;">
+                <span class="material-symbols-outlined" style="font-size: 1.5rem;">shopping_cart</span>
+                <span id="global-cart-badge"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+                    style="font-size: 0.65rem;">
+                    0
+                </span>
+            </a>
+            <button id="nav-login-btn"
+                class="btn d-none d-md-inline-flex fs-5 px-3 py-2 rounded-pill font-sans fw-bold transition-colors hover-bg-light border-0"
+                style="color: #111827;" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Log In
+            </button>
+            <a href="#"
+                class="d-inline-flex d-md-none align-items-center justify-content-center p-2 rounded-circle border transition-colors hover-bg-light text-decoration-none"
+                style="border-color: #e5e7eb; color: #111827;">
+                <span class="material-symbols-outlined" style="font-size: 1.5rem; stroke-width: 1.5;">menu</span>
+            </a>
+            <button id="nav-register-btn"
+                class="btn d-none d-md-inline-flex align-items-center justify-content-center px-4 py-2 rounded-pill fs-5 font-sans fw-bold transition-colors hover-bg-darker border-0"
+                style="background-color: #111827; color: white;" data-bs-toggle="modal" data-bs-target="#registerModal">
+                Register
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow-1">
+
+        <section class="container-fluid px-4 px-md-5 pt-5 pb-5" style="max-width: 1200px; margin-top: 1rem;">
+
+            <!-- Header row -->
+            <div class="row align-items-end mb-4 pb-2">
+                <div class="col-12 col-md-7">
+                    <h1 class="display-3 fw-semibold font-sans mb-3 mb-md-0"
+                        style="color: #111827; letter-spacing: -0.02em;">Our Story, Vision,<br>and Values</h1>
+                </div>
+                <div class="col-12 col-md-5 text-md-end">
+                    <p class="fs-6 text-muted font-sans mb-2" style="max-width: 25rem; margin-left: auto;">
+                        Learn about our commitment to excellence, innovation, and the principles that guide our work
+                        every day.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Banner Image Replacement: Typographic Logo with Stickers -->
+            <div class="position-relative mb-5 pb-4">
+                <div class="overflow-hidden position-relative d-flex align-items-center justify-content-center"
+                    style="border-radius: 1.5rem; border-bottom-right-radius: 4rem; background-color: #f8fafc; height: 350px;">
+
+                    <!-- Decorative background blobs -->
+                    <div class="position-absolute rounded-circle"
+                        style="width: 300px; height: 300px; background: rgba(59, 130, 246, 0.08); top: -50px; left: -50px; filter: blur(40px);">
+                    </div>
+                    <div class="position-absolute rounded-circle"
+                        style="width: 250px; height: 250px; background: rgba(16, 185, 129, 0.08); bottom: -50px; right: 50px; filter: blur(40px);">
+                    </div>
+
+                    <!-- Logo Text -->
+                    <h2 class="display-1 fw-bold font-poppins m-0 position-relative z-3"
+                        style="color: #1f2937; letter-spacing: -0.04em; font-size: 6rem;">
+                        learnify
+                    </h2>
+
+                    <!-- Floating Stickers (Using Material Symbols styled as stickers) -->
+                    <!-- Code Sticker -->
+                    <div class="position-absolute z-2" style="top: 15%; left: 15%; transform: rotate(-15deg);">
+                        <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                            style="width: 70px; height: 70px; border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;">
+                            <span class="material-symbols-outlined" style="font-size: 36px; color: #3b82f6;">code</span>
+                        </div>
+                    </div>
+
+                    <!-- Book Sticker -->
+                    <div class="position-absolute z-2" style="bottom: 20%; left: 25%; transform: rotate(10deg);">
+                        <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                            style="width: 80px; height: 80px; border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 40px; color: #10b981;">menu_book</span>
+                        </div>
+                    </div>
+
+                    <!-- Lightbulb Sticker -->
+                    <div class="position-absolute z-2" style="top: 25%; right: 20%; transform: rotate(20deg);">
+                        <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                            style="width: 75px; height: 75px; border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 40px; color: #f59e0b;">lightbulb</span>
+                        </div>
+                    </div>
+
+                    <!-- Laptop Sticker -->
+                    <div class="position-absolute z-2" style="bottom: 15%; right: 28%; transform: rotate(-12deg);">
+                        <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+                            style="width: 85px; height: 85px; border: 3px solid white; box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 44px; color: #8b5cf6;">laptop_mac</span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Floating green button -->
+                <a href="#about-content"
+                    class="position-absolute d-flex align-items-center justify-content-center text-white transition-transform hover-scale text-decoration-none"
+                    style="width: 4rem; height: 4rem; background-color: #00d282; border-radius: 50%; right: 1.5rem; bottom: -2rem; z-index: 10; box-shadow: 0 10px 25px rgba(0,210,130,0.3);">
+                    <span class="material-symbols-outlined" style="font-size: 1.75rem;">arrow_downward</span>
+                </a>
+            </div>
+
+            <!-- Content section below -->
+            <div id="about-content" class="row gx-5 mt-5">
+                <!-- Left Column -->
+                <div class="col-12 col-lg-6 mb-5 mb-lg-0 pe-lg-5">
+                    <div class="mb-3">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 3rem; color: #d1d5db; transform: scaleX(-1);">format_quote</span>
+                    </div>
+                    <p class="fs-5 font-sans mb-0" style="color: #374151; line-height: 1.6;">
+                        Learnify is a modern Learning Management System (LMS) designed to make online education simple,
+                        interactive, and accessible for everyone. Our platform is built to connect students and
+                        educators in a smart digital environment where learning becomes more organized, engaging, and
+                        effective. Whether it is accessing study materials, attending courses, tracking progress, or
+                        managing assignments, Learnify provides all essential academic tools in one place.
+                    </p>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-12 col-lg-6">
+                    <div class="h-100 p-4 p-md-5 d-flex flex-column text-white shadow-lg"
+                        style="background-color: #3b42a4; border-radius: 1.5rem;">
+                        <div class="d-flex justify-content-end align-items-center gap-2 mb-4">
+                            <span class="fw-bold font-sans"
+                                style="color: #00d282; font-size: 0.85rem; letter-spacing: 0.05em;">ABOUT US</span>
+                            <span class="material-symbols-outlined"
+                                style="color: #00d282; font-size: 1.5rem;">settings</span>
+                        </div>
+
+                        <p class="font-sans mb-4"
+                            style="font-size: 1.1rem; line-height: 1.7; font-weight: 300; opacity: 0.95;">
+                            At Learnify, we believe that technology has the power to transform education. That is why
+                            our
+                            system is designed with a user-friendly interface and practical features that help learners
+                            focus on gaining knowledge without unnecessary complexity. Students can explore courses,
+                            learn
+                            at their own pace, and stay updated with academic activities, while instructors can easily
+                            upload content, manage classes, and monitor student performance.
+
+                        </p>
+                        <p class="font-sans mb-0"
+                            style="font-size: 1.1rem; line-height: 1.7; font-weight: 300; opacity: 0.95;">
+                            Our goal is to create a seamless and efficient learning experience that supports both
+                            teaching
+                            and learning in the digital age. Learnify is not just a platform—it is a step toward smarter
+                            education, where knowledge is easier to access, progress is easier to measure, and learning
+                            is more flexible than ever before.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top pt-5 pb-4 px-4 px-md-5 mt-auto" style="border-color: #e5e7eb !important;">
+        <div class="container-fluid p-0 mb-5" style="max-width: 1400px;">
+            <div class="row g-4 fs-5">
+                <div class="col-6 col-md-6">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Learnify</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="about.html"
+                                class="font-sans fw-bold hover-text-dark transition-colors text-decoration-none"
+                                style="color: #4b5563;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-6">
+                    <h4 class="mb-4 fw-bold font-sans"
+                        style="color: #111827; letter-spacing: -0.025em; font-size: 1.125rem;">Catalog</h4>
+                    <ul class="list-unstyled d-flex flex-column gap-3 m-0">
+                        <li><a href="courses.html"
+                                class="font-sans fw-bold hover-text-dark transition-colors text-decoration-none"
+                                style="color: #4b5563;">All Courses</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid p-0 border-top pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between"
+            style="max-width: 1400px; border-color: #f3f4f6 !important; color: #6b7280;">
+            <p class="mb-0 fw-bold font-sans">© 2026 Learnify Inc. All rights reserved.</p>
+            <div class="d-flex gap-3 mt-3 mt-md-0">
+                <a href="#" class="hover-text-dark transition-colors text-decoration-none" style="color: #6b7280;"><span
+                        class="material-symbols-outlined" style="font-size: 1.25rem; stroke-width: 1.5;">tag</span></a>
+                <a href="#" class="hover-text-dark transition-colors text-decoration-none" style="color: #6b7280;"><span
+                        class="material-symbols-outlined" style="font-size: 1.25rem; stroke-width: 1.5;">link</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title font-sans fw-bold fs-4" style="color: #111827;">Welcome Back</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-3">
+                    <div id="loginError" class="alert alert-danger d-none font-sans py-2"></div>
+                    <form id="loginForm" onsubmit="submitLogin(event)">
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Email</label>
+                            <input type="email" id="loginEmail" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="loginPassword"
+                                    class="form-control rounded-start-3 py-2 bg-light border-0" placeholder="••••••••"
+                                    required>
+                                <button class="btn bg-light border-0 rounded-end-3 text-muted px-3" type="button"
+                                    onclick="const p=document.getElementById('loginPassword'); p.type=p.type==='password'?'text':'password'; this.querySelector('span').textContent=p.type==='password'?'visibility':'visibility_off';">
+                                    <span class="material-symbols-outlined align-middle"
+                                        style="font-size: 20px;">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-dark w-100 rounded-pill py-2 font-sans fw-bold border-0">Sign In</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <span class="text-muted font-sans">Don't have an account? </span>
+                        <a href="#" class="fw-bold text-dark" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#registerModal">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title font-sans fw-bold fs-4" style="color: #111827;">Create Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-3">
+                    <div id="registerError" class="alert alert-danger d-none font-sans py-2"></div>
+                    <div id="registerSuccess" class="alert alert-success d-none font-sans py-2"></div>
+                    <form id="registerForm" onsubmit="submitRegister(event)">
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Full Name</label>
+                            <input type="text" id="regName" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="John Doe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Email</label>
+                            <input type="email" id="regEmail" class="form-control rounded-3 py-2 bg-light border-0"
+                                placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label font-sans fw-semibold" style="color: #4b5563;">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="regPassword"
+                                    class="form-control rounded-start-3 py-2 bg-light border-0"
+                                    placeholder="At least 6 characters" required>
+                                <button class="btn bg-light border-0 rounded-end-3 text-muted px-3" type="button"
+                                    onclick="const p=document.getElementById('regPassword'); p.type=p.type==='password'?'text':'password'; this.querySelector('span').textContent=p.type==='password'?'visibility':'visibility_off';">
+                                    <span class="material-symbols-outlined align-middle"
+                                        style="font-size: 20px;">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-dark w-100 rounded-pill py-2 font-sans fw-bold border-0">Sign Up</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <span class="text-muted font-sans">Already have an account? </span>
+                        <a href="#" class="fw-bold text-dark" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#loginModal">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Mega Menu Interactivity & Auth Logic -->
+    <script src="home.js"></script>
+</body>
+
+</html>

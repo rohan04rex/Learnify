@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Default admin account  password: admin123
 INSERT INTO `users` (`Name`, `Email`, `PasswordHash`, `Role`) VALUES
-  ('Admin User', 'admin@learnify.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin');
+  ('Admin User', 'admin@learnify.com', '$2y$10$mTc1Pf7poFM2EZtc5hJ5XeEn.UZa013hyes5TW2D6eMjY6CAFqoX6', 'admin');
 
 -- -------------------------------------------------------
 -- 2. courses

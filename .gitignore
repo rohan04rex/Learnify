@@ -17,3 +17,10 @@ vendor/
 # Admin Frontend
 admin-frontend/node_modules/
 admin-frontend/dist/
+
+# Security
+.env
+.env.local
+.env.*.local
+api/.env
+node-api/.env

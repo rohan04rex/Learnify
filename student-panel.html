@@ -53,8 +53,155 @@
                 </a>
             </div>
 
+            <!-- AI Recommendations Section -->
+            <div id="aiRecommendations" class="mt-5 pt-4 d-none">
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined text-primary" style="font-size: 2rem; color: #6366f1 !important;">auto_awesome</span>
+                    <div>
+                        <h2 class="fw-bold font-sans mb-0" style="color: #111827;">Recommended for You</h2>
+                        <p class="text-muted font-sans mb-0" style="font-size: 0.875rem;">AI-powered courses matching your interests</p>
+                    </div>
+                </div>
+                <div id="recsGrid" class="row g-4">
+                    <!-- Populated via AI API -->
+                </div>
+            </div>
+
+            <!-- AI Feature 2: Performance Predictor -->
+            <div id="performancePredictor" class="mt-5 pt-4">
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <span class="material-symbols-outlined" style="font-size: 2rem; color: #f59e0b;">psychology</span>
+                    <div>
+                        <h2 class="fw-bold font-sans mb-0" style="color: #111827;">Performance Predictor</h2>
+                        <p class="text-muted font-sans mb-0" style="font-size: 0.875rem;">AI-powered grade prediction using Machine Learning</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Input Card -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white predictor-card">
+                            <h5 class="fw-bold font-sans mb-4" style="color: #111827;">
+                                <span class="material-symbols-outlined align-middle me-2" style="font-size: 1.25rem; color: #6366f1;">tune</span>
+                                Enter Your Data
+                            </h5>
+
+                            <!-- Attendance Slider -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label fw-semibold font-sans mb-0" style="color: #374151;">Attendance</label>
+                                    <span id="attendanceValue" class="badge rounded-pill px-3 py-2 fw-bold font-sans" style="background: #f3f4f6; color: #111827; font-size: 0.9rem;">75%</span>
+                                </div>
+                                <input type="range" id="attendanceSlider" class="form-range predictor-range" min="0" max="100" value="75"
+                                    oninput="document.getElementById('attendanceValue').textContent = this.value + '%'; updateSliderTrack(this);">
+                                <div class="d-flex justify-content-between mt-1">
+                                    <small class="text-muted font-sans">0%</small>
+                                    <small class="text-muted font-sans">100%</small>
+                                </div>
+                            </div>
+
+                            <!-- Marks Slider -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label fw-semibold font-sans mb-0" style="color: #374151;">Marks</label>
+                                    <span id="marksValue" class="badge rounded-pill px-3 py-2 fw-bold font-sans" style="background: #f3f4f6; color: #111827; font-size: 0.9rem;">65%</span>
+                                </div>
+                                <input type="range" id="marksSlider" class="form-range predictor-range" min="0" max="100" value="65"
+                                    oninput="document.getElementById('marksValue').textContent = this.value + '%'; updateSliderTrack(this);">
+                                <div class="d-flex justify-content-between mt-1">
+                                    <small class="text-muted font-sans">0%</small>
+                                    <small class="text-muted font-sans">100%</small>
+                                </div>
+                            </div>
+
+                            <!-- Predict Button -->
+                            <button id="predictBtn" onclick="predictGrade()" class="btn w-100 rounded-pill py-3 font-sans fw-bold border-0 shadow-sm predict-btn">
+                                <span class="material-symbols-outlined align-middle me-2" style="font-size: 1.25rem;">auto_awesome</span>
+                                Predict My Grade
+                            </button>
+
+                            <p class="text-muted font-sans text-center mt-3 mb-0" style="font-size: 0.75rem;">
+                                Powered by Logistic Regression · scikit-learn
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Result Card -->
+                    <div class="col-12 col-lg-7">
+                        <div id="predictResult" class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white predictor-card">
+                            <!-- Default state -->
+                            <div id="predictDefault" class="d-flex flex-column align-items-center justify-content-center h-100 text-center py-5">
+                                <span class="material-symbols-outlined text-muted mb-3" style="font-size: 4rem; opacity: 0.3;">school</span>
+                                <h5 class="fw-semibold font-sans text-muted mb-2">Ready to Predict</h5>
+                                <p class="text-muted font-sans mb-0" style="font-size: 0.875rem; max-width: 280px;">
+                                    Adjust attendance and marks, then click "Predict My Grade" to see your AI-predicted result.
+                                </p>
+                            </div>
+
+                            <!-- Loading state -->
+                            <div id="predictLoading" class="d-none d-flex flex-column align-items-center justify-content-center h-100 py-5">
+                                <div class="spinner-border text-dark mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+                                <p class="text-muted font-sans fw-medium">Analyzing with ML model...</p>
+                            </div>
+
+                            <!-- Result state -->
+                            <div id="predictOutput" class="d-none">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h5 class="fw-bold font-sans mb-0" style="color: #111827;">
+                                        <span class="material-symbols-outlined align-middle me-2" style="font-size: 1.25rem; color: #10b981;">insights</span>
+                                        Prediction Result
+                                    </h5>
+                                    <span id="modelBadge" class="badge rounded-pill px-3 py-2 fw-medium font-sans" style="background: #f3f4f6; color: #6b7280; font-size: 0.7rem;"></span>
+                                </div>
+
+                                <!-- Grade Display -->
+                                <div class="text-center mb-4 p-4 rounded-4" id="gradeDisplayCard" style="background: #f8fafc;">
+                                    <div id="gradeCircle" class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3 grade-circle-animate" style="width: 100px; height: 100px;">
+                                        <span id="gradeText" class="fw-bold text-white" style="font-size: 2.5rem; font-family: 'Poppins', sans-serif;"></span>
+                                    </div>
+                                    <h4 class="fw-bold font-sans mb-1" style="color: #111827;">
+                                        Grade: <span id="gradeLetter"></span>
+                                    </h4>
+                                    <p class="text-muted font-sans mb-0">
+                                        Confidence: <span id="confidenceText" class="fw-bold"></span>
+                                    </p>
+                                </div>
+
+                                <!-- Stats Row -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-4">
+                                        <div class="text-center p-3 rounded-3" style="background: #f3f4f6;">
+                                            <p class="text-muted font-sans mb-1" style="font-size: 0.75rem;">Attendance</p>
+                                            <p id="statAttendance" class="fw-bold font-sans mb-0" style="color: #111827; font-size: 1.1rem;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-center p-3 rounded-3" style="background: #f3f4f6;">
+                                            <p class="text-muted font-sans mb-1" style="font-size: 0.75rem;">Marks</p>
+                                            <p id="statMarks" class="fw-bold font-sans mb-0" style="color: #111827; font-size: 1.1rem;"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-center p-3 rounded-3" style="background: #f3f4f6;">
+                                            <p class="text-muted font-sans mb-1" style="font-size: 0.75rem;">Weighted</p>
+                                            <p id="statWeighted" class="fw-bold font-sans mb-0" style="color: #111827; font-size: 1.1rem;"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Probability Breakdown -->
+                                <h6 class="fw-bold font-sans mb-3" style="color: #374151;">Probability Breakdown</h6>
+                                <div id="probBars">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Enrolled courses grid -->
-            <div id="enrolledGrid" class="row g-4">
+            <div id="enrolledGrid" class="row g-4 mt-1">
                 <!-- Populated via JS -->
             </div>
 
@@ -76,12 +223,190 @@
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-4" style="z-index: 1060;">
+        <div id="liveToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body font-sans fw-semibold" id="toastMsg">
+                    Message here
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .ai-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid transparent !important; }
+        .ai-card:hover { transform: translateY(-8px); border-color: #6366f1 !important; box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.2) !important; }
+        .ai-badge { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; }
+
+        /* ── Performance Predictor Styles ─────────────────────── */
+        .predictor-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent !important;
+        }
+        .predictor-card:hover {
+            border-color: #f59e0b !important;
+            box-shadow: 0 12px 24px -8px rgba(245, 158, 11, 0.15) !important;
+        }
+
+        /* Range slider styling */
+        .predictor-range {
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 999px;
+            background: linear-gradient(to right, #e5e7eb 0%, #e5e7eb 100%);
+            outline: none;
+        }
+        .predictor-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #111827;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 3px solid white;
+            transition: transform 0.15s ease;
+        }
+        .predictor-range::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+        .predictor-range::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #111827;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 3px solid white;
+        }
+
+        /* Predict button */
+        .predict-btn {
+            background: linear-gradient(135deg, #111827 0%, #374151 100%);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(17, 24, 39, 0.3);
+            color: white;
+        }
+        .predict-btn:active { transform: translateY(0); }
+        .predict-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: left 0.5s ease;
+        }
+        .predict-btn:hover::after { left: 100%; }
+
+        /* Grade circle animation */
+        .grade-circle-animate {
+            animation: gradePopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+        @keyframes gradePopIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Probability bars */
+        .prob-bar-track {
+            height: 10px;
+            border-radius: 999px;
+            background: #f3f4f6;
+            overflow: hidden;
+        }
+        .prob-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Fade-in animation for result */
+        .result-fade-in {
+            animation: fadeSlideIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeSlideIn {
+            0% { opacity: 0; transform: translateY(16px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
     <script>
         const API_BASE = 'http://localhost/Learnify XAMP/api';
+        const AI_BASE = 'http://localhost:8000';
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        }
+
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('liveToast');
+            if(t) {
+                t.style.backgroundColor = isError ? '#dc2626' : '#111827';
+                document.getElementById('toastMsg').textContent = msg;
+                bootstrap.Toast.getOrCreateInstance(t, { delay: 3000 }).show();
+            }
+        }
+
+        async function fetchRecommendations(interests) {
+            try {
+                const res = await fetch(`${AI_BASE}/recommend?interests=${encodeURIComponent(interests)}&top_n=4`);
+                const data = await res.json();
+                
+                if (data.recommendations && data.recommendations.length > 0) {
+                    const recsGrid = document.getElementById('recsGrid');
+                    document.getElementById('aiRecommendations').classList.remove('d-none');
+                    
+                    recsGrid.innerHTML = data.recommendations.map(r => `
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="card h-100 ai-card shadow-sm rounded-4 overflow-hidden bg-white">
+                                <div class="position-relative bg-light" style="padding-top:56.25%;">
+                                    <img src="${escapeHTML(r.Image) || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'}"
+                                        class="position-absolute top-0 w-100 h-100" style="object-fit:cover;"
+                                        alt="${escapeHTML(r.CourseName)}">
+                                    <span class="position-absolute top-0 end-0 m-3 px-3 py-1 rounded-pill fw-bold font-sans shadow-sm ai-badge"
+                                        style="font-size:0.65rem; text-transform: uppercase;">
+                                        AI Recommended
+                                    </span>
+                                </div>
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <span class="text-uppercase fw-bold text-muted mb-2" style="font-size:0.75rem; letter-spacing:0.05em;">${escapeHTML(r.Category)}</span>
+                                    <h3 class="fs-6 fw-bold font-sans mb-1" style="color:#111827; line-height:1.4;">${escapeHTML(r.CourseName)}</h3>
+                                    <p class="text-muted font-sans mb-0" style="font-size:0.875rem;">By ${escapeHTML(r.Instructor)}</p>
+                                    <div class="mt-auto pt-3">
+                                        <button onclick="addToCart(${r.CourseID}, this)" class="btn btn-outline-primary w-100 rounded-pill py-2 font-sans fw-bold"
+                                            style="border-color: #6366f1; color: #6366f1;">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                console.warn("AI Service unavailable or failed. Hiding recommendations.", err);
+                document.getElementById('aiRecommendations').classList.add('d-none');
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const res = await fetch(`${API_BASE}/cart.php?action=check`);
+                const res = await fetch(`${API_BASE}/cart.php?action=check`, { credentials: 'include' });
                 const data = await res.json();
 
                 if (!data.loggedIn) {
@@ -90,13 +415,13 @@
                 }
 
                 // Logged in — show user info in nav
-                document.getElementById('nav-user-name').textContent = `Hi, ${data.user.name.split(' ')[0]}!`;
+                document.getElementById('nav-user-name').textContent = `Hi, ${escapeHTML(data.user.name.split(' ')[0])}!`;
                 document.getElementById('nav-logout-btn').classList.remove('d-none');
                 document.getElementById('welcomeMsg').textContent = `You have ${0} enrolled courses. Keep learning!`;
                 document.getElementById('loggedInContent').classList.remove('d-none');
 
                 // Load enrolled courses
-                const eRes = await fetch(`${API_BASE}/cart.php?action=list`);
+                const eRes = await fetch(`${API_BASE}/cart.php?action=list`, { credentials: 'include' });
                 const eData = await eRes.json();
 
                 const grid = document.getElementById('enrolledGrid');
@@ -110,28 +435,36 @@
 
                 document.getElementById('welcomeMsg').textContent = `You are enrolled in ${eData.enrollments.length} course${eData.enrollments.length > 1 ? 's' : ''}. Keep learning!`;
 
+                // After loading enrolled courses, fetch AI recommendations
+                const interests = eData.enrollments.map(e => e.Category).join(',') || 'web development, javascript, programming';
+                fetchRecommendations(interests);
+
                 grid.innerHTML = eData.enrollments.map(e => `
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                         <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bg-white">
                             <div class="position-relative bg-light" style="padding-top:56.25%;">
-                                <img src="${e.Image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'}"
+                                <img src="${escapeHTML(e.Image) || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'}"
                                     class="position-absolute top-0 w-100 h-100" style="object-fit:cover;"
-                                    alt="${e.CourseName}" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'">
+                                    alt="${escapeHTML(e.CourseName)}" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'">
                                 <span class="position-absolute top-0 start-0 m-3 px-3 py-1 rounded-pill fw-bold font-sans shadow-sm"
                                     style="font-size:0.75rem; background:#d1fae5; color:#065f46;">
                                     <span class="material-symbols-outlined align-middle" style="font-size:0.875rem;">check_circle</span> Enrolled
                                 </span>
                             </div>
                             <div class="card-body p-4 d-flex flex-column">
-                                <span class="text-uppercase fw-bold text-primary mb-2" style="font-size:0.75rem; letter-spacing:0.05em;">${e.Category}</span>
-                                <h3 class="fs-6 fw-bold font-sans mb-1" style="color:#111827; line-height:1.4;">${e.CourseName}</h3>
-                                <p class="text-muted font-sans mb-2" style="font-size:0.875rem;">By ${e.Instructor}</p>
-                                <p class="text-muted font-sans mb-3" style="font-size:0.75rem;">Enrolled on ${new Date(e.EnrolledAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })}</p>
-                                <div class="mt-auto pt-3 border-top" style="border-color:#f3f4f6 !important;">
-                                    <button class="btn w-100 rounded-pill py-2 font-sans fw-bold border-0"
-                                        style="background-color:#f3f4f6; color:#111827;">
-                                        <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">play_circle</span>
-                                        Continue Learning
+                                <span class="text-uppercase fw-bold text-primary mb-2" style="font-size:0.75rem; letter-spacing:0.05em;">${escapeHTML(e.Category)}</span>
+                                <h3 class="fs-6 fw-bold font-sans mb-1" style="color:#111827; line-height:1.4;">${escapeHTML(e.CourseName)}</h3>
+                                <p class="text-muted font-sans mb-2" style="font-size:0.875rem;">By ${escapeHTML(e.Instructor)}</p>
+                                <p class="text-muted font-sans mb-3" style="font-size:0.75rem;">Enrolled on ${escapeHTML(new Date(e.EnrolledAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }))}</p>
+                                <div class="mt-auto pt-3 border-top d-flex gap-2" style="border-color:#f3f4f6 !important;">
+                                    <button class="btn btn-dark flex-grow-1 rounded-pill py-2 font-sans fw-bold border-0"
+                                        style="background-color:#111827; color:white;">
+                                        <span class="material-symbols-outlined align-middle me-1" style="font-size:1.125rem;">play_circle</span>
+                                        Learn
+                                    </button>
+                                    <button onclick="unenrollCourse(${e.CourseID}, '${escapeHTML(e.CourseName.replace(/'/g, "\\'"))}')" class="btn btn-outline-danger rounded-circle p-2 d-flex align-items-center justify-content-center" 
+                                            style="width: 40px; height: 40px;" title="Unenroll / Disown Course">
+                                        <span class="material-symbols-outlined" style="font-size:1.25rem;">delete_forever</span>
                                     </button>
                                 </div>
                             </div>
@@ -146,10 +479,139 @@
             }
         });
 
+        async function unenrollCourse(courseID, courseName) {
+            if (!confirm(`Are you sure you want to disown/unenroll from "${courseName}"?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/cart.php?courseID=${courseID}`, { method: 'DELETE', credentials: 'include' });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Successfully unenrolled.');
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    showToast(data.message || 'Error unenrolling.', true);
+                }
+            } catch (err) {
+                showToast('Connection error.', true);
+            }
+        }
+
+        async function addToCart(courseID, btn) {
+            let localCart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
+            if (!localCart.includes(courseID)) {
+                localCart.push(courseID);
+                localStorage.setItem('learnify_cart', JSON.stringify(localCart));
+            }
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span> Added';
+            showToast('Added to Cart!');
+            // Update global badge if updateGlobalCartBadge exists (from home.js if included, but student panel might not have it)
+            if (typeof updateGlobalCartBadge === 'function') updateGlobalCartBadge();
+        }
+
         async function logout() {
-            await fetch(`${API_BASE}/logout.php`);
+            await fetch(`${API_BASE}/logout.php`, { credentials: 'include' });
             window.location.href = 'index.html';
         }
+
+        // ── Performance Predictor ──────────────────────────────────────────────
+        const GRADE_COLORS = { 'A': '#10b981', 'B': '#3b82f6', 'C': '#f59e0b', 'Fail': '#ef4444' };
+
+        function updateSliderTrack(slider) {
+            const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            slider.style.background = `linear-gradient(to right, #111827 0%, #374151 ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`;
+        }
+
+        function initSliders() {
+            document.querySelectorAll('.predictor-range').forEach(s => updateSliderTrack(s));
+        }
+
+        async function predictGrade() {
+            const attendance = parseInt(document.getElementById('attendanceSlider').value);
+            const marks = parseInt(document.getElementById('marksSlider').value);
+            const btn = document.getElementById('predictBtn');
+
+            // Show loading
+            document.getElementById('predictDefault').classList.add('d-none');
+            document.getElementById('predictOutput').classList.add('d-none');
+            document.getElementById('predictLoading').classList.remove('d-none');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Analyzing...';
+
+            try {
+                const res = await fetch(`${AI_BASE}/predict?attendance=${attendance}&marks=${marks}`);
+                const data = await res.json();
+
+                // Hide loading
+                document.getElementById('predictLoading').classList.add('d-none');
+
+                // Populate result
+                const color = GRADE_COLORS[data.grade] || '#6b7280';
+
+                // Grade circle
+                const circle = document.getElementById('gradeCircle');
+                circle.style.backgroundColor = color;
+                circle.style.animation = 'none';
+                circle.offsetHeight; // trigger reflow
+                circle.style.animation = 'gradePopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+
+                document.getElementById('gradeText').textContent = data.grade;
+                document.getElementById('gradeLetter').textContent = data.grade;
+                document.getElementById('gradeLetter').style.color = color;
+                document.getElementById('confidenceText').textContent = data.confidence + '%';
+                document.getElementById('confidenceText').style.color = color;
+                document.getElementById('modelBadge').textContent = data.model_type;
+
+                // Stats
+                document.getElementById('statAttendance').textContent = data.attendance + '%';
+                document.getElementById('statMarks').textContent = data.marks + '%';
+                document.getElementById('statWeighted').textContent = data.weighted_score;
+
+                // Probability bars
+                const probBars = document.getElementById('probBars');
+                const grades = ['A', 'B', 'C', 'Fail'];
+                probBars.innerHTML = grades.map((g, idx) => {
+                    const pct = data.breakdown[g] || 0;
+                    const barColor = GRADE_COLORS[g];
+                    const isHighest = g === data.grade;
+                    return `
+                        <div class="d-flex align-items-center gap-3 mb-3" style="animation: fadeSlideIn 0.4s ease-out ${idx * 0.1}s both;">
+                            <span class="fw-bold font-sans" style="width: 36px; color: ${barColor}; font-size: 0.9rem;">${g}</span>
+                            <div class="prob-bar-track flex-grow-1">
+                                <div class="prob-bar-fill" style="width: 0%; background: ${isHighest ? barColor : '#d1d5db'};" data-target-width="${pct}%"></div>
+                            </div>
+                            <span class="fw-bold font-sans text-end" style="width: 48px; color: ${isHighest ? barColor : '#9ca3af'}; font-size: 0.85rem;">${pct}%</span>
+                        </div>
+                    `;
+                }).join('');
+
+                // Show result with animation
+                const output = document.getElementById('predictOutput');
+                output.classList.remove('d-none');
+                output.classList.add('result-fade-in');
+
+                // Animate probability bars after a short delay
+                setTimeout(() => {
+                    document.querySelectorAll('.prob-bar-fill').forEach(bar => {
+                        bar.style.width = bar.dataset.targetWidth;
+                    });
+                }, 100);
+
+                showToast(`Predicted Grade: ${data.grade} (${data.confidence}% confidence)`);
+
+            } catch (err) {
+                document.getElementById('predictLoading').classList.add('d-none');
+                document.getElementById('predictDefault').classList.remove('d-none');
+                console.error('Prediction failed:', err);
+                showToast('AI Service unavailable. Make sure the Python server is running (start_ai.bat).', true);
+            }
+
+            // Reset button
+            btn.disabled = false;
+            btn.innerHTML = '<span class="material-symbols-outlined align-middle me-2" style="font-size: 1.25rem;">auto_awesome</span>Predict My Grade';
+        }
+
+        // Initialize slider tracks on load
+        document.addEventListener('DOMContentLoaded', () => { initSliders(); });
     </script>
 </body>
 

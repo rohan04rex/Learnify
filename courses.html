@@ -27,12 +27,15 @@
                 class="d-flex align-items-center justify-content-center p-2 rounded-circle transition-colors hover-bg-light position-relative"
                 style="color: #4b5563; text-decoration: none; margin-right: 0.5rem;" title="View Cart">
                 <span class="material-symbols-outlined" style="font-size: 1.5rem;">shopping_cart</span>
+                <span id="global-cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" style="font-size: 0.65rem;">
+                    0
+                </span>
             </a>
             <span id="nav-user-name" class="font-sans fw-bold text-dark d-none"></span>
             <a id="nav-panel-link" href="student-panel.html" class="btn fs-6 px-3 py-2 font-sans fw-bold border-0 d-none" style="color: #111827;">My Courses</a>
             <button id="nav-logout-btn" class="btn fs-6 px-3 py-2 font-sans fw-bold border-0 text-muted d-none" onclick="logout()">Log Out</button>
-            <button id="nav-login-btn" class="btn fs-5 px-3 py-2 rounded-pill font-sans fw-bold border-0" style="color: #111827;" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</button>
-            <button id="nav-register-btn" class="btn px-4 py-2 rounded-pill fs-5 font-sans fw-bold border-0" style="background-color: #111827; color: white;" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+            <button id="nav-login-btn" class="btn fs-5 px-3 py-2 rounded-pill font-sans fw-bold transition-colors hover-bg-light border-0" style="color: #111827;" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</button>
+            <button id="nav-register-btn" class="btn px-4 py-2 rounded-pill fs-5 font-sans fw-bold transition-colors hover-bg-darker border-0" style="background-color: #111827; color: white;" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
         </div>
     </header>
 
@@ -179,8 +182,21 @@
         let localCart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
         let isLoggedIn = false;
 
+        function updateGlobalCartBadge() {
+            const badge = document.getElementById('global-cart-badge');
+            if (!badge) return;
+            const cart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
+            if (cart.length > 0) {
+                badge.textContent = cart.length;
+                badge.classList.remove('d-none');
+            } else {
+                badge.classList.add('d-none');
+            }
+        }
+
         // ── Init ──────────────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', async () => {
+            updateGlobalCartBadge();
             await checkSession();
             await loadCourses();
 
@@ -194,7 +210,7 @@
         // ── Session check ─────────────────────────────────────────────────────
         async function checkSession() {
             try {
-                const res = await fetch(`${API_BASE}/cart.php?action=check`);
+                const res = await fetch(`${API_BASE}/cart.php?action=check`, { credentials: 'include' });
                 const data = await res.json();
                 if (data.loggedIn) {
                     isLoggedIn = true;
@@ -215,7 +231,7 @@
                     };
 
                     showLoggedInNav(data.user.name);
-                    const enrolled = await fetch(`${API_BASE}/cart.php?action=list`);
+                    const enrolled = await fetch(`${API_BASE}/cart.php?action=list`, { credentials: 'include' });
                     const eData = await enrolled.json();
                     if (eData.success) enrolledIds = new Set(eData.enrollments.map(e => e.CourseID));
                 }
@@ -232,7 +248,7 @@
         }
 
         async function logout() {
-            await fetch(`${API_BASE}/logout.php`);
+            await fetch(`${API_BASE}/logout.php`, { credentials: 'include' });
             localStorage.removeItem('learnify_cart');
             location.reload();
         }
@@ -242,7 +258,7 @@
             const grid = document.getElementById('coursesGrid');
             grid.innerHTML = `<div class="col-12 text-center py-5"><div class="spinner-border text-dark" role="status"></div></div>`;
             try {
-                const res = await fetch(`${API_BASE}/courses.php`);
+                const res = await fetch(`${API_BASE}/courses.php`, { credentials: 'include' });
                 const data = await res.json();
                 allCourses = data.courses || [];
                 buildCategoryBar();
@@ -345,6 +361,17 @@
         }
 
         // ── Render cards ──────────────────────────────────────────────────────
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str).replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        }
+
         function renderCourses(courses) {
             const grid = document.getElementById('coursesGrid');
             const noMsg = document.getElementById('noCoursesMsg');
@@ -356,26 +383,33 @@
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden group">
                         <div class="position-relative bg-light" style="padding-top:56.25%;">
-                            <img src="${c.Image || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'}"
-                                class="position-absolute top-0 w-100 h-100 object-fit-cover" alt="${c.CourseName}" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'">
+                            <img src="${escapeHTML(c.Image) || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'}"
+                                class="position-absolute top-0 w-100 h-100 object-fit-cover" alt="${escapeHTML(c.CourseName)}" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'">
                             <span class="position-absolute top-0 end-0 m-3 px-3 py-1 bg-white rounded-pill font-sans fw-bold shadow-sm" style="font-size:0.875rem; color:#111827;">₹${parseFloat(c.Price).toFixed(0)}</span>
                         </div>
                         <div class="card-body p-4 d-flex flex-column bg-white">
-                            <span class="text-uppercase fw-bold text-primary mb-2" style="font-size:0.75rem; letter-spacing:0.05em;">${c.Category}</span>
-                            <h3 class="fs-6 fw-bold font-sans mb-2" style="color:#111827; line-height:1.4;">${c.CourseName}</h3>
+                            <span class="text-uppercase fw-bold text-primary mb-2" style="font-size:0.75rem; letter-spacing:0.05em;">${escapeHTML(c.Category)}</span>
+                            <h3 class="fs-6 fw-bold font-sans mb-2" style="color:#111827; line-height:1.4;">${escapeHTML(c.CourseName)}</h3>
                             <div class="mt-auto pt-3 border-top" style="border-color:#f3f4f6 !important;">
-                                <p class="text-muted font-sans mb-3" style="font-size:0.875rem;">By ${c.Instructor}</p>
+                                <p class="text-muted font-sans mb-3" style="font-size:0.875rem;">By ${escapeHTML(c.Instructor)}</p>
                                 ${enrolled
-                                    ? `<button class="btn w-100 rounded-pill py-2 font-sans fw-bold border-0" style="background:#d1fae5; color:#065f46;" disabled>
-                                           <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">check_circle</span>Enrolled
-                                       </button>`
-                                    : `<div class="d-flex gap-2 w-100">
-                                           <button class="btn btn-outline-dark rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Add to Cart" onclick="addToCart(${c.CourseID}, this)" ${localCart.includes(c.CourseID) ? 'disabled' : ''}>
-                                               ${localCart.includes(c.CourseID) 
-                                                  ? '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span>'
-                                                  : '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">add_shopping_cart</span>'
-                                               }
+                                    ? `<div class="d-flex gap-2 w-100">
+                                           <button class="btn flex-grow-1 rounded-pill py-2 font-sans fw-bold border-0" style="background:#d1fae5; color:#065f46;" disabled>
+                                               <span class="material-symbols-outlined align-middle me-1" style="font-size:1rem;">check_circle</span>Enrolled
                                            </button>
+                                           <button onclick="unenrollCourse(${c.CourseID}, '${escapeHTML(c.CourseName.replace(/'/g, "\\'"))}')" class="btn btn-outline-danger rounded-pill px-3 py-2 font-sans fw-bold d-flex align-items-center justify-content-center" title="Unenroll / Disown">
+                                               <span class="material-symbols-outlined" style="font-size:1.125rem;">delete</span>
+                                           </button>
+                                       </div>`
+                                    : `<div class="d-flex gap-2 w-100">
+                                           ${localCart.includes(c.CourseID) 
+                                               ? `<button class="btn btn-outline-danger rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Remove from Cart" onclick="removeFromCart(${c.CourseID}, this)">
+                                                      <span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">remove_shopping_cart</span>
+                                                  </button>`
+                                               : `<button class="btn btn-outline-dark rounded-pill py-2 font-sans fw-bold d-flex align-items-center justify-content-center px-3" title="Add to Cart" onclick="addToCart(${c.CourseID}, this)">
+                                                      <span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">add_shopping_cart</span>
+                                                  </button>`
+                                           }
                                            <button class="btn btn-dark rounded-pill py-2 font-sans fw-bold border-0 flex-grow-1" onclick="buyNow(${c.CourseID}, this)">
                                                Buy Now
                                            </button>
@@ -391,7 +425,7 @@
         // ── Add to cart / buy now ──────────────────────────────────────────────
         async function addToCart(courseID, btn) {
             try {
-                const res = await fetch(`${API_BASE}/cart.php?action=check`);
+                const res = await fetch(`${API_BASE}/cart.php?action=check`, { credentials: 'include' });
                 const data = await res.json();
                 if (!data.loggedIn) {
                     new bootstrap.Modal(document.getElementById('loginModal')).show();
@@ -405,10 +439,35 @@
             if (!localCart.includes(courseID)) {
                 localCart.push(courseID);
                 localStorage.setItem('learnify_cart', JSON.stringify(localCart));
+                updateGlobalCartBadge();
+                showToast('Added to Cart!');
+                filterCourses(); // Re-render to show "Remove from Cart" button
             }
-            btn.disabled = true;
-            btn.innerHTML = '<span class="material-symbols-outlined align-middle" style="font-size:1.125rem;">check</span>';
-            showToast('Added to Cart!');
+        }
+
+        function removeFromCart(courseID, btn) {
+            localCart = localCart.filter(id => id !== courseID);
+            localStorage.setItem('learnify_cart', JSON.stringify(localCart));
+            updateGlobalCartBadge();
+            showToast('Removed from Cart');
+            filterCourses(); // Re-render to show "Add to Cart" button
+        }
+
+        async function unenrollCourse(courseID, courseName) {
+            if (!confirm(`Are you sure you want to disown/unenroll from "${courseName}"?`)) return;
+            try {
+                const res = await fetch(`${API_BASE}/cart.php?courseID=${courseID}`, { method: 'DELETE', credentials: 'include' });
+                const data = await res.json();
+                if (data.success) {
+                    enrolledIds.delete(courseID);
+                    showToast('Successfully unenrolled.');
+                    filterCourses(); // Re-render
+                } else {
+                    showToast(data.message || 'Error unenrolling.', true);
+                }
+            } catch (err) {
+                showToast('Connection error.', true);
+            }
         }
 
         async function buyNow(courseID, btn) {
@@ -418,6 +477,7 @@
             try {
                 const res = await fetch(`${API_BASE}/cart.php`, {
                     method: 'POST',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ courseID })
                 });
@@ -455,6 +515,7 @@
             errEl.classList.add('d-none');
             const res = await fetch(`${API_BASE}/login.php`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ email: loginEmail.value, password: loginPassword.value })
             });
@@ -463,7 +524,7 @@
                 bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
                 showLoggedInNav(data.user.name);
 
-                const enrolled = await fetch(`${API_BASE}/cart.php?action=list`);
+                const enrolled = await fetch(`${API_BASE}/cart.php?action=list`, { credentials: 'include' });
                 const eData = await enrolled.json();
                 if (eData.success) enrolledIds = new Set(eData.enrollments.map(e => e.CourseID));
                 renderCourses(allCourses.filter(c => activeCategory === 'All' || c.Category === activeCategory));
@@ -483,6 +544,7 @@
             sucEl.classList.add('d-none');
             const res = await fetch(`${API_BASE}/register.php`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ name: regName.value, email: regEmail.value, password: regPassword.value })
             });

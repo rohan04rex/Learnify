@@ -112,9 +112,24 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Auth & Session Logic ──────────────────────────────────────────────
 const API_BASE = 'http://localhost/Learnify XAMP/api';
 
-document.addEventListener('DOMContentLoaded', async () => {
+function updateGlobalCartBadge() {
+    const badge = document.getElementById('global-cart-badge');
+    if (!badge) return;
     try {
-        const res = await fetch(`${API_BASE}/cart.php?action=check`);
+        const cart = JSON.parse(localStorage.getItem('learnify_cart') || '[]');
+        if (cart.length > 0) {
+            badge.textContent = cart.length;
+            badge.classList.remove('d-none');
+        } else {
+            badge.classList.add('d-none');
+        }
+    } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    updateGlobalCartBadge();
+    try {
+        const res = await fetch(`${API_BASE}/cart.php?action=check`, { credentials: 'include' });
         const data = await res.json();
         if (data.loggedIn) {
             // Restore user-specific cart into session cart
@@ -125,11 +140,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 localStorage.setItem('learnify_cart', JSON.stringify(merged));
             }
 
-            // Intercept cart saves to mirror them to this user's persistent cart
+            // Intercept cart saves to mirror them to this user's persistent cart and update badge
             const origSet = localStorage.setItem;
             localStorage.setItem = function(k, v) {
                 origSet.apply(this, arguments);
-                if (k === 'learnify_cart') origSet.call(this, 'learnify_cart_' + data.user.userID, v);
+                if (k === 'learnify_cart') {
+                    origSet.call(this, 'learnify_cart_' + data.user.userID, v);
+                    updateGlobalCartBadge();
+                }
             };
 
             // Swap Login/Register buttons with user info + logout
@@ -143,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function doLogout() {
-    await fetch(`${API_BASE}/logout.php`);
+    await fetch(`${API_BASE}/logout.php`, { credentials: 'include' });
     localStorage.removeItem('learnify_cart');
     location.reload();
 }
@@ -154,6 +172,7 @@ async function submitLogin(e) {
     errEl.classList.add('d-none');
     const res = await fetch(`${API_BASE}/login.php`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: document.getElementById('loginEmail').value, password: document.getElementById('loginPassword').value })
     });
@@ -174,6 +193,7 @@ async function submitRegister(e) {
     errEl.classList.add('d-none'); sucEl.classList.add('d-none');
     const res = await fetch(`${API_BASE}/register.php`, {
         method: 'POST',
+        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: document.getElementById('regName').value, email: document.getElementById('regEmail').value, password: document.getElementById('regPassword').value })
     });
